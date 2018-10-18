@@ -1,5 +1,4 @@
 
-
 class Task:
   def __init__(self, robot):
     self.robot = robot
@@ -12,3 +11,6 @@ class Task:
 
   def cooldown(self):
     pass
+
+  def mock(self, input):
+    return "this is a test"
