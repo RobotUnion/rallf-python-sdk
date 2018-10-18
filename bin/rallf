@@ -1,0 +1,29 @@
+#!/usr/bin/env python3
+import json
+import sys
+
+from rallf.tools import Runner, Execution
+from rallf.tools.RobotFactory import RobotFactory
+
+
+def error(err, code=-1):
+    usage = "%s run <task-dir>" % sys.argv[0]
+    sys.stderr("Error: %s\n%s\n" % (err, usage))
+    exit(code)
+
+
+if 2 <= len(sys.argv) <= 3 and sys.argv[1] == "run":
+    taskDir = "." if len(sys.argv) == 2 else sys.argv[2]
+else:
+    taskDir = None
+    error("Error: Invalid arguments")
+
+factory = RobotFactory()
+r = Runner()
+
+bot = factory.createEmpty()
+task = json.loads(open("%s/manifest.json" % taskDir, "r"))['main']
+
+x = Execution(task, bot, {})
+
+r.execute(x)
