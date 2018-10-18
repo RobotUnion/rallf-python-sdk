@@ -46,10 +46,10 @@ rallf start hello
 ## Extended usage
 ### Task Manifest
 ### Injected objects
-- robot
-- input
+- `self.robot`: this object is injected in the task creation
+- `input`: this parameter is passed to the `run(self, input)` function
 ### Inter-task communication (task delegates)
 ### Task lifecycle callbacks
-- warmup
-- run
-- cooldown
+- `warmup(self)`: this optional method is executed some time before the task starts to speed-up the `run` function.
+- `run(self, input)`: this required method handles the work of the task and is triggered at start of the task.
+- `cooldown(self)`: this method is called when the task is going to be some time without use.
