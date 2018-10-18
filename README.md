@@ -44,7 +44,12 @@ rallf start hello
 ```
 
 ## Extended usage
+### Task Manifest
 ### Injected objects
 - robot
 - input
 ### Inter-task communication (task delegates)
+### Task lifecycle callbacks
+- warmup
+- run
+- cooldown
