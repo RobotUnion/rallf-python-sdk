@@ -6,7 +6,7 @@
 [![GitHub issues](https://img.shields.io/github/issues/robotunion/rallf-python-sdk.svg)](https://github.com/robotunion/rallf-python-sdk/issues)
 [![PyPI](https://img.shields.io/pypi/v/rallf.svg)](https://pypi.org/pypi/rallf/)
 [![Python Versions](https://img.shields.io/pypi/pyversions/rallf.svg)](https://pypi.org/pypi/rallf/)
-[![Hackage-Deps](https://img.shields.io/hackage-deps/v/rallf.svg)](https://pypi.org/pypi/rallf/)
+[![Requirements Status](https://requires.io/github/RobotUnion/rallf-python-sdk/requirements.svg?branch=master)](https://requires.io/github/RobotUnion/rallf-python-sdk/requirements/?branch=master)
 
 
 RALLF SDK provides the tools to create tasks for rallf robots (rallf.com) using python3.
