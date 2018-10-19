@@ -16,7 +16,8 @@ cd rallf-python-sdk
 python3 setup.py install
 ```
 
-## Basic usage (hello bot)
+## Getting started (hello bot)
+In order to get started with robot task development, just run `rallf create-project "hello"` and it will create a basic project with the files explained below.
 ### Create `hello.py`
 ```python3
 # File: hello.py
@@ -40,19 +41,22 @@ class Hello(rallf.Task):
         return browser.getTitle()
     
 ```
-### Try it
+### Try it (rallf runner)
 ```bash
-rallf run --main "hello.Hello"
+rallf run --main "hello.Hello" .
 ```
 
 ## Extended usage
 ### Task Manifest
-```json
+Task manifest is mandatory for rallf.com tasks, but not necessary for developing, visit [manifest reference](undefined) to learn more in-deep about task manifests.
+```js
+/* File manifest.json */
 {
   "title": "Hello Task",
   "description": "This tasks logs hello and returns the <title> of github.com",
   "long-description": "@README.md",
   "fqtn": "com.example.hello",
+  "type": "task",
   "main": "hello.Hello",
   "devices": ["firefox"],
   "skills": [],
@@ -62,10 +66,12 @@ rallf run --main "hello.Hello"
 }
 ```
 ### Injected objects
-- `self.robot`: this object is injected in the task creation
-- `input`: this parameter is passed to the `run(self, input)` function
+- `self.robot` this object is injected in the task creation
+- `input` this parameter is passed to the `run(self, input)` function
 ### Inter-task communication (task delegates)
+- Call other tasks from rallf.com
+- Use robot skills
 ### Task lifecycle callbacks
-- `warmup(self)`: this optional method is executed some time before the task starts to speed-up the `run` function.
-- `run(self, input)`: this required method handles the work of the task and is triggered at start of the task.
-- `cooldown(self)`: this method is called when the task is going to be some time without use.
+- `warmup(self)` this **optional** method is executed some time before the task starts to speed-up the `run` function.
+- `run(self, input)` this **required** method handles the work of the task and is triggered at start of the task.
+- `cooldown(self)` this **optional** method is called when the task is going to be some time without use.
