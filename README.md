@@ -1,6 +1,8 @@
 # RALF Python SDK
 RALLF SDK provides the tools to create tasks for rallf robots (rallf.com) using python3.
 
+**Disclaimer! This package is in development stage (unstable), it may be potentially buggy**
+
 ## Installation
 ### Using Python Package Index (PyPI)
 ```bash
@@ -40,11 +42,25 @@ class Hello(rallf.Task):
 ```
 ### Try it
 ```bash
-rallf start hello
+rallf run --main "hello.Hello"
 ```
 
 ## Extended usage
 ### Task Manifest
+```json
+{
+  "title": "Hello Task",
+  "description": "This tasks logs hello and returns the <title> of github.com",
+  "long-description": "@README.md",
+  "fqtn": "com.example.hello",
+  "main": "hello.Hello",
+  "devices": ["firefox"],
+  "skills": [],
+  "permissions": {
+    "kb.internet.site.github": ["read"]
+  }
+}
+```
 ### Injected objects
 - `self.robot`: this object is injected in the task creation
 - `input`: this parameter is passed to the `run(self, input)` function
