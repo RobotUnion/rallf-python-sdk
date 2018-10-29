@@ -66,12 +66,18 @@ Task manifest is mandatory for rallf.com tasks, but not necessary for developing
   "description": "This tasks logs hello and returns the <title> of github.com",
   "long-description": "@README.md",
   "fqtn": "com.example.hello",
-  "type": "task",
+  "type": "task", /* choices: task, skill */
   "main": "hello.Hello",
+  "exports": ["run"], /* default: ["run"] */
   "devices": ["firefox"],
   "skills": [],
   "permissions": {
-    "kb.internet.site.github": ["read"]
+    "uris": ["https://github.com", "https://google.com"],
+    "devices": ["firefox", "chrome"],
+    "skills": {
+      "com.example.facebook": ["likePage", "likePost"],
+      "com.example.gmail": ["search", "likepost"]
+    },
   }
 }
 ```
