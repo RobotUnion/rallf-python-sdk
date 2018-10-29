@@ -1,12 +1,10 @@
 import threading
 import time
 
-from rallf.sdk import Caller, Logger
-
 
 class Task(threading.Thread):
 
-  def __init__(self, robot, caller=Caller, logger=Logger):
+  def __init__(self, robot, caller, logger):
     super().__init__()
     self.manifest = None
     self.robot = robot

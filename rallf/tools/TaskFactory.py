@@ -5,7 +5,7 @@ import os
 class TaskFactory:
 
     @staticmethod
-    def createFromDir(dir, robot):
+    def createFromDir(dir, robot, caller, logger):
         manifest_path = "%s/manifest.json" % dir
 
         if not os.path.isfile(manifest_path):
@@ -16,6 +16,6 @@ class TaskFactory:
         package = ".".join(task_class[:-1])
         classname = task_class[-1]
         Task = getattr(__import__(package, fromlist=[classname]), classname)
-        t = Task(robot)
+        t = Task(robot, caller, logger)
         t.manifest = manifest
         return t

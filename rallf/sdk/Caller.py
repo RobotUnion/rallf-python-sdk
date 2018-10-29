@@ -1,7 +1,7 @@
 from rallf.tools import Communicator
 
 
-class Caller:
+class Caller(Communicator):
     def __init__(self, input, output):
         super().__init__(input, output)
 
