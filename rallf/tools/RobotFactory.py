@@ -1,7 +1,10 @@
 from rallf.tools import Robot
+from .RallfFactory import RallfFactory
 import json, pathlib
 
-class RobotFactory:
+
+class RobotFactory(RallfFactory):
+
     def __init__(self):
         pass
 
@@ -15,9 +18,6 @@ class RobotFactory:
 
         # Robot skills
         bot.skills = json.load(open(dir + "/skills.json", "r"))
-
-        # Robot's knowledge base
-        bot.kb = json.load(open(dir + "/kb.json", "r"))
 
         return bot
 

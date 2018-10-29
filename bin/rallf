@@ -1,29 +1,45 @@
 #!/usr/bin/env python3
-import json
 import sys
+import argparse
+import os
 
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
+
+from rallf.tools.TaskFactory import TaskFactory
 from rallf.tools import Runner, Execution
-from rallf.tools.RobotFactory import RobotFactory
+from rallf.tools import RobotFactory
 
+from rallf.cli import RallfArgs
 
-def error(err, code=-1):
-    usage = "%s run <task-dir>" % sys.argv[0]
-    sys.stderr("Error: %s\n%s\n" % (err, usage))
-    exit(code)
+p = argparse.ArgumentParser(description="Rallf developer tool")
+p.add_argument("command", nargs=1, action="store", choices=["new-task", "run", "event"], help="rallf command")
+p.add_argument("task_dir", action="store", nargs="?", default=".", help="task directory (default: current)")
+p.add_argument("-f", "--func", dest="func", default="main", action="store", help="the main task function (default: main)")
+p.add_argument("-r", "--robot", dest="robot", action="store", default=None, help="robot to invoke (default: nullbot)")
+p.add_argument("-m", "--mocks", dest="mocks", action="store", default=None, help="mocks directory (default: None)")
+p.add_argument("-i", "--input", dest="input", default="{}", action="store", help="task's input in JSON (default: {})")
 
+args = RallfArgs()
+p.parse_args(namespace=args)
 
-if 2 <= len(sys.argv) <= 3 and sys.argv[1] == "run":
-    taskDir = "." if len(sys.argv) == 2 else sys.argv[2]
-else:
-    taskDir = None
-    error("Error: Invalid arguments")
+print(args.getProcessed())
+exit(0)
 
 factory = RobotFactory()
+
+bot = factory.createEmpty() if args.robot is None else factory.createFromDir(args.robot)
+
 r = Runner()
 
-bot = factory.createEmpty()
-task = json.loads(open("%s/manifest.json" % taskDir, "r"))['main']
+tf = TaskFactory()
+task = tf.createFromDir(args.task_dir)
 
-x = Execution(task, bot, {})
+if args.func != "main" and args.func not in task.manifest['exports']:
+    raise RuntimeError("%s function not exported in package" % args.func)
+
+x = Execution(task, args.func, bot, args.input)
 
 r.execute(x)
+
+

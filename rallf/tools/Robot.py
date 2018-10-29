@@ -4,4 +4,7 @@ class Robot:
     def __init__(self):
         self.devices = []
         self.skills = []
-        self.kb = {}
+        self.home = {}
+
+    def use(self, skill, data):
+        pass

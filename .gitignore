@@ -1,6 +1,6 @@
 /.idea
 /build
 /dist
-/rallf.egg-info
+**.egg-info
 **.swp
 **~
