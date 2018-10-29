@@ -1,15 +1,19 @@
 import threading
 import time
 
+from rallf.sdk import Caller, Logger
+
 
 class Task(threading.Thread):
-  def __init__(self, robot, input):
+
+  def __init__(self, robot, caller=Caller, logger=Logger):
     super().__init__()
     self.manifest = None
     self.robot = robot
-    self.input = input
     self.finished = False
     self.status = "stopped"
+    self.logger = logger
+    self.caller = caller
 
   def warmup(self):
     self.status = "ready"
@@ -20,9 +24,6 @@ class Task(threading.Thread):
     self.cooldown()
 
   def main(self, input):
-    pass
-
-  def delegate(self, fqtn, data):
     pass
 
   def cooldown(self):

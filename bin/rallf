@@ -6,7 +6,7 @@ import os
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
 
-from rallf.tools.TaskFactory import TaskFactory
+from rallf.tools import TaskFactory
 from rallf.tools import Runner, Execution
 from rallf.tools import RobotFactory
 
@@ -23,9 +23,6 @@ p.add_argument("-i", "--input", dest="input", default="{}", action="store", help
 args = RallfArgs()
 p.parse_args(namespace=args)
 
-print(args.getProcessed())
-exit(0)
-
 factory = RobotFactory()
 
 bot = factory.createEmpty() if args.robot is None else factory.createFromDir(args.robot)
@@ -33,7 +30,7 @@ bot = factory.createEmpty() if args.robot is None else factory.createFromDir(arg
 r = Runner()
 
 tf = TaskFactory()
-task = tf.createFromDir(args.task_dir)
+task = tf.createFromDir(args.task_dir, bot)
 
 if args.func != "main" and args.func not in task.manifest['exports']:
     raise RuntimeError("%s function not exported in package" % args.func)

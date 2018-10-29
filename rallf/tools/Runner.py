@@ -14,5 +14,5 @@ class Runner:
         getattr(execution.task, execution.func)(execution.input)
         getattr(execution.task, 'cooldown')()
 
-        os.unlink(DIR)
+        #os.unlink(DIR)
 

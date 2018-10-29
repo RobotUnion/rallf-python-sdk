@@ -1,3 +1,4 @@
+from rallf.sdk import Caller
 
 
 class Robot:
@@ -5,6 +6,7 @@ class Robot:
         self.devices = []
         self.skills = []
         self.home = {}
+        self.caller = Caller
 
     def use(self, skill, data):
-        pass
+        return self.caller.use(skill, data)

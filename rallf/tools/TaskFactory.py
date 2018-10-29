@@ -1,15 +1,11 @@
 import json
 import os
 
-from .RallfFactory import RallfFactory
 
+class TaskFactory:
 
-class TaskFactory(RallfFactory):
-
-    def createEmpty(self):
-        raise NotImplementedError("cannot create empty task")
-
-    def createFromDir(self, dir):
+    @staticmethod
+    def createFromDir(dir, robot):
         manifest_path = "%s/manifest.json" % dir
 
         if not os.path.isfile(manifest_path):
@@ -20,6 +16,6 @@ class TaskFactory(RallfFactory):
         package = ".".join(task_class[:-1])
         classname = task_class[-1]
         Task = getattr(__import__(package, fromlist=[classname]), classname)
-        t = Task()
+        t = Task(robot)
         t.manifest = manifest
         return t

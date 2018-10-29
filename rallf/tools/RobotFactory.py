@@ -1,17 +1,14 @@
-from rallf.tools import Robot
-from .RallfFactory import RallfFactory
+from rallf.sdk import Robot
 import json, pathlib
 
 
-class RobotFactory(RallfFactory):
+class RobotFactory:
 
-    def __init__(self):
-        pass
-
-    def createFromDir(self, dir):
+    @staticmethod
+    def createFromDir(dir):
         if not pathlib.Path(dir).is_dir():
             raise NotADirectoryError("%s is not a valid directory" % dir)
-        bot = Robot
+        bot = Robot()
 
         # Robot devices
         bot.devices = json.load(open(dir + "/devices.json", "r"))
