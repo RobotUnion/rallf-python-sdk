@@ -1,4 +1,4 @@
-from rallf.tools import Execution
+from rallf.tools.execution import Execution
 import os
 
 
@@ -11,7 +11,8 @@ class Runner:
         os.mkdir(DIR); os.chdir(DIR)
         # os.chroot(DIR)
         getattr(execution.task, 'warmup')()
-        getattr(execution.task, execution.func)(execution.input)
+        if execution.func is None: getattr(execution.task, "waitloop")()
+        else: getattr(execution.task, execution.func)(execution.input)
         getattr(execution.task, 'cooldown')()
 
         #os.unlink(DIR)

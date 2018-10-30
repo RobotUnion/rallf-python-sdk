@@ -1,5 +1,7 @@
-from rallf.sdk import Robot
-import json, pathlib
+import json
+import pathlib
+
+from rallf.sdk.robot import Robot
 
 
 class RobotFactory:

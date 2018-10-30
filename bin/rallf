@@ -3,20 +3,19 @@ import sys
 import argparse
 import os
 
-
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
 
-from rallf.sdk import Logger, Caller
-from rallf.tools import TaskFactory
-from rallf.tools import Runner, Execution
-from rallf.tools import RobotFactory
+from rallf.cli.rallf_args import RallfArgs
+from rallf.tools.execution import Execution
+from rallf.tools.robot_factory import RobotFactory
+from rallf.tools.runner import Runner
+from rallf.tools.task_factory import TaskFactory
 
-from rallf.cli import RallfArgs
 
 p = argparse.ArgumentParser(description="Rallf developer tool")
 p.add_argument("command", nargs=1, action="store", choices=["new-task", "run", "event"], help="rallf command")
 p.add_argument("task_dir", action="store", nargs="?", default=".", help="task directory (default: current)")
-p.add_argument("-f", "--func", dest="func", default="main", action="store", help="the main task function (default: main)")
+p.add_argument("-f", "--func", dest="func", default=None, action="store", help="the routine to execute (default: None)")
 p.add_argument("-r", "--robot", dest="robot", action="store", default=None, help="robot to invoke (default: nullbot)")
 p.add_argument("-m", "--mocks", dest="mocks", action="store", default=None, help="mocks directory (default: None)")
 p.add_argument("-i", "--input", dest="input", default="{}", action="store", help="task's input in JSON (default: {})")
@@ -24,18 +23,16 @@ p.add_argument("-i", "--input", dest="input", default="{}", action="store", help
 args = RallfArgs()
 p.parse_args(namespace=args)
 
-factory = RobotFactory()
+rf = RobotFactory()
 
-bot = factory.createEmpty() if args.robot is None else factory.createFromDir(args.robot)
+bot = rf.createEmpty() if args.robot is None else rf.createFromDir(args.robot)
 
 r = Runner()
-caller = Caller(sys.stdin, sys.stdout)
-logger = Logger(sys.stdin, sys.stdout)
 
 tf = TaskFactory()
-task = tf.createFromDir(args.task_dir, bot, caller, logger)
+task = tf.createFromDir(args.task_dir, bot, sys.stdin, sys.stdout)
 
-if args.func != "main" and args.func not in task.manifest['exports']:
+if args.func is not None and args.func not in task.manifest['exports']:
     raise RuntimeError("%s function not exported in package" % args.func)
 
 x = Execution(task, args.func, bot, args.input)

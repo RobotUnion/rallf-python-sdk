@@ -7,7 +7,7 @@ class RallfArgs(object):
     def __init__(self):
         self.command = None
         self.task_dir = None
-        self.func = "main"
+        self.func = None
         self.robot = None
         self.mocks = None
         self.input = {}

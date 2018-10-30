@@ -1,4 +1,4 @@
-from rallf.sdk import Caller
+from rallf.sdk.caller import Caller
 
 
 class Robot:
