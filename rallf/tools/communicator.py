@@ -12,7 +12,9 @@ class Communicator:
         self.output.write("%s\n" % json.dumps(request))
 
     def rpcreceive(self):
-        return json.loads(self.input.readline())
+        input = self.input.readline()
+        if not input: raise EOFError("End Of File detected")
+        return json.loads(input)
 
     def rpccall(self, method, params, id=False):
         request = {"jsonrpc": "2.0", "method": method, "params": params}

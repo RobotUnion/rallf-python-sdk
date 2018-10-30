@@ -1,16 +1,18 @@
 #!/usr/bin/env python3
+import signal
 import sys
 import argparse
 import os
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
 
+from rallf.tools import Communicator
+
 from rallf.cli.rallf_args import RallfArgs
 from rallf.tools.execution import Execution
 from rallf.tools.robot_factory import RobotFactory
 from rallf.tools.runner import Runner
 from rallf.tools.task_factory import TaskFactory
-
 
 p = argparse.ArgumentParser(description="Rallf developer tool")
 p.add_argument("command", nargs=1, action="store", choices=["new-task", "run", "event"], help="rallf command")
@@ -31,6 +33,13 @@ r = Runner()
 
 tf = TaskFactory()
 task = tf.createFromDir(args.task_dir, bot, sys.stdin, sys.stdout)
+
+
+def sigint_handler(sig, frame):
+    raise InterruptedError()
+
+
+signal.signal(signal.SIGINT, sigint_handler)
 
 if args.func is not None and args.func not in task.manifest['exports']:
     raise RuntimeError("%s function not exported in package" % args.func)

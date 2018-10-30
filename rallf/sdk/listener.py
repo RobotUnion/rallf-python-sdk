@@ -1,4 +1,5 @@
 import json
+from json.decoder import JSONDecodeError
 
 from rallf.sdk.rallf_error import RallfError
 from rallf.tools.communicator import Communicator
@@ -9,13 +10,18 @@ class Listener(Communicator):
         super().__init__(input, output)
 
     def listen(self, task):
-        while True:
+        try:
             req = self.wait()
             if 'method' in req:
                 try:
                     resp = getattr(task, req['params']['routine'])(req['params']['args'])
-                    task.caller.rpcresponse(req['id'], result=resp, error=False)
+                    task.caller.rpcresponse(id=req['id'], result=resp, error=False)
                 except RallfError as e:
-                    task.caller.rpcresponse(req['id'], error=e.dict(), result=False)
+                    task.caller.rpcresponse(id=req['id'], error=e.dict(), result=False)
             else:
                 self.mq.append(req)
+
+        except JSONDecodeError:
+            task.caller.rpcresponse(id=None, error={"code": -32700, "message": "Parse error"})
+        except (EOFError, InterruptedError):
+            task.finish()
