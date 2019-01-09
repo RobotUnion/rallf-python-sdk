@@ -1,0 +1,2 @@
+{"jsonrpc":"2.0","method":"delegate_local","id":1,"params":{"routine":"get_followers","args":{}}}
+{"jsonrpc":"2.0","method":"delegate_local","id":2,"params":{"routine":"follow_by_tweet_keywords","args":{"keywords": ["apple watch", "samsung gear", "samsung wear", "fossil q", "tickwatch e", "huawei watch", "kate spade watch", "skagen falster", "smartwatch"]}}}

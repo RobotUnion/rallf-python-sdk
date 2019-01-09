@@ -1,4 +1,0 @@
-{
-  "main": "rallf.example.hello.Hello",
-  "exports": ["main"]
-}

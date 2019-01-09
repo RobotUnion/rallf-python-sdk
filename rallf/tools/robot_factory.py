@@ -10,15 +10,7 @@ class RobotFactory:
     def createFromDir(dir):
         if not pathlib.Path(dir).is_dir():
             raise NotADirectoryError("%s is not a valid directory" % dir)
-        bot = Robot
-
-        # Robot devices
-        bot.devices = json.load(open(dir + "/devices.json", "r"))
-
-        # Robot skills
-        bot.skills = json.load(open(dir + "/skills.json", "r"))
-
-        return bot
+        return Robot(dir, json.load(open(dir + "/skills.json", "r")), json.load(open(dir + "/devices.json", "r")))
 
     def createEmpty(self):
-        return Robot
+        return Robot("/tmp/empty", {}, {})

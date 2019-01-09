@@ -16,6 +16,4 @@ class TaskFactory:
         package = ".".join(task_class[:-1])
         classname = task_class[-1]
         Task = getattr(__import__(package, fromlist=[classname]), classname)
-        t = Task(robot, input, output)
-        t.manifest = manifest
-        return t
+        return Task(manifest, robot, input, output)

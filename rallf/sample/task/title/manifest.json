@@ -1,0 +1,5 @@
+{
+  "fqtn": "com.rallf.example.title",
+  "main": "rallf.task.title.title.Title",
+  "exports": ["get_title"]
+}

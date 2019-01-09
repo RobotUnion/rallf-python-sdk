@@ -1,0 +1,17 @@
+{
+  "name": "Smith",
+  "android-keyboard-map": {
+    "qwertyuiop": {
+      "top": 926,
+      "range": [40, 680]
+    },
+    "asdfghjkl": {
+      "top": 1026,
+      "range": [76, 144]
+    },
+    "zxcvbnm": {
+      "top": 1126,
+      "range": [145, 570]
+    }
+  }
+}

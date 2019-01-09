@@ -10,7 +10,7 @@ class RallfArgs(object):
         self.func = None
         self.robot = None
         self.mocks = None
-        self.input = {}
+        self.input = "{}"
 
     def __str__(self):
         return json.dumps({

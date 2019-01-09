@@ -7,8 +7,10 @@ class Runner:
         pass
 
     def execute(self, execution: Execution):
-        DIR = "/tmp/%s" % execution.id
-        os.mkdir(DIR); os.chdir(DIR)
+        DIR = execution.task.home
+
+        if not os.path.exists(DIR): os.mkdir(DIR)
+        os.chdir(DIR)
         # os.chroot(DIR)
         getattr(execution.task, 'warmup')()
         if execution.func is None: getattr(execution.task, "waitloop")()

@@ -1,6 +1,6 @@
 
 class RallfError(RuntimeError):
-    def __init__(self, code, message, data):
+    def __init__(self, code, message, data=None):
         self.code = code
         self.message = message
         self.data = data
