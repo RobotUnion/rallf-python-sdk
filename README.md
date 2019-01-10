@@ -23,6 +23,7 @@ pip3 install rallf
 ```bash
 git clone https://github.com/RobotUnion/rallf-python-sdk
 cd rallf-python-sdk
+pip3 install -r requirements.txt
 python3 setup.py install
 ```
 
