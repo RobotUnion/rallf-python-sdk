@@ -1,5 +1,5 @@
 {
   "fqtn": "com.rallf.example.twitter",
-  "main": "rallf.task.twitter.src.main.twitter.Twitter",
+  "main": "rallf.sample.task.twitter.src.main.twitter.Twitter",
   "exports": ["search", "get_followers"]
 }
