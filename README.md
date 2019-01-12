@@ -27,21 +27,21 @@ pip3 install -r requirements.txt
 python3 setup.py install
 ```
 
-## Getting started (hello bot)
+## Getting started (hello bot-task)
 In order to get started with robot task development, just run `rallf create-project "hello"` and it will create a basic project with the files explained below.
 ### Create `hello.py`
 ```python3
 # File: hello.py
 
-import rallf
+from rallf import Task
 
 '''
   Hello task opens github and returns the title of the page upon it is loaded.
   To learn more about python selenium api, see https://selenium-python.readthedocs.io/
 '''
-class Hello(rallf.Task):
+class Hello(Task):
 
-    # implementing self.run is required for tasks
+    # implementing self.run is required for tasks, not for skills
     def run(self, input):
         # Log stuff via the available logger
         self.logger.debug('Hello Bot')
@@ -52,9 +52,21 @@ class Hello(rallf.Task):
         return browser.getTitle()
     
 ```
-### Try it (rallf runner)
+### Try it (rallf cli)
+
+## Run `run` method using the `CLI`
 ```bash
-rallf run --main "hello.Hello" .
+python3 -m rallf.cli run . -f run
+```
+
+## Run `run` method using the `jsonrpc` api
+```bash
+echo '{"jsonrpc": "2.0", "id": 1, "method": "delegate_local", "params": {"routine": "run", "args": {}}}' | python3 -m rallf.cli run .
+```
+
+## Get help 
+```bash
+python3 -m rallf.cli -h
 ```
 
 ## Extended usage
@@ -77,7 +89,7 @@ Task manifest is mandatory for rallf.com tasks, but not necessary for developing
     "devices": ["firefox", "chrome"],
     "skills": {
       "com.example.facebook": ["likePage", "likePost"],
-      "com.example.gmail": ["search", "likepost"]
+      "com.example.gmail": ["search", "likePost"]
     },
   }
 }
@@ -85,10 +97,15 @@ Task manifest is mandatory for rallf.com tasks, but not necessary for developing
 ### Injected objects
 - `self.robot` this object is injected in the task creation
 - `input` this parameter is passed to the `run(self, input)` function
-### Inter-task communication (task delegates)
-- Call other tasks from rallf.com
+### Inter Task Communication (ITC)
+- Call other tasks from the market ([rallf.com](https://rallf.com))
 - Use robot skills
 ### Task lifecycle callbacks
-- `warmup(self)` this **optional** method is executed some time before the task starts to speed-up the `run` function.
+- `warmup(self)` this **optional** method is executed some time before the task starts to speed-up the rest of calls.
 - `run(self, input)` this **required** method handles the work of the task and is triggered at start of the task.
 - `cooldown(self)` this **optional** method is called when the task is going to be some time without use.
+
+### Task VS Skill
+A common question is the difference between Task and Skill inside the RALLF ecosystem, the main difference is that
+Tasks only have one method called `run` and the skill can have multiple, so technically a Task is a subtype of Skill,
+and also a Skill can implement the `run` method and can be called as Task.
