@@ -17,7 +17,6 @@ class Task:
 
     def warmup(self):
         self.status = "ready"
-        self.network.event("warmup:end", {})
 
     def waitloop(self):
         while not self.finished:

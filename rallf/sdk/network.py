@@ -1,5 +1,3 @@
-import random
-
 from rallf.tools.communicator import Communicator
 
 
@@ -17,4 +15,4 @@ class Network(Communicator):
         return self.call("delegate_remote", routine, args)
 
     def event(self, name, data=None):
-        return self.rpccall("event", {"name": name, "data": data})
+        return self.rpccall("event", {"name": name, "data": data}, wait=False)

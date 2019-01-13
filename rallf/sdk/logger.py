@@ -11,7 +11,7 @@ class Logger(Communicator):
         super().__init__(input, output)
 
     def log(self, msg, severity=7, data=None):
-        return self.rpccall("log", {"message": str(msg), "severity": severity, "data": data})
+        return self.rpccall("log", {"message": str(msg), "severity": severity, "data": data}, wait=False)
 
     def debug(self, msg, data=None):
         """Debug: debug-level messages"""

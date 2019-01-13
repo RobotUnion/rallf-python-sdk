@@ -12,10 +12,11 @@ class Runner:
         if not os.path.exists(DIR): os.mkdir(DIR)
         os.chdir(DIR)
         # os.chroot(DIR)
-        getattr(execution.task, 'warmup')()
-        if execution.func is None: getattr(execution.task, "waitloop")()
+        execution.task.warmup()
+        execution.task.network.event("warmup:end")
+        if execution.func is None: execution.task.waitloop()
         else: getattr(execution.task, execution.func)(execution.input)
-        getattr(execution.task, 'cooldown')()
+        execution.task.cooldown()
 
         #os.unlink(DIR)
 

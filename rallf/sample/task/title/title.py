@@ -15,6 +15,7 @@ class Title(Task):
         self.logger.info("WARMUP!!!")
         factory = SeleniumDeviceFactory(self.robot)
         self.browser = factory.build('firefox63')
+        super().warmup()
 
     def get_title(self, input):
         self.logger.debug("get_title started!")
@@ -30,3 +31,5 @@ class Title(Task):
             self.browser.close()
         except WebDriverException:
             self.logger.warning("driver already closed")
+
+        super().cooldown()

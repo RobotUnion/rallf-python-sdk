@@ -113,6 +113,7 @@ class InstallApp(Task):
         self.device.press_keycode(0x3)
         time.sleep(1)
         self.logger.info("WARMUP!!!")
+        super().warmup()
 
     def install(self, input):
         self.logger.debug("install started!")

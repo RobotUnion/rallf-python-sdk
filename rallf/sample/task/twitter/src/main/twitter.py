@@ -27,6 +27,7 @@ class Twitter(Task):
         factory = SeleniumDeviceFactory(self.robot)
         self.browser = factory.build('firefox63', self.ffoxProfile)
         self.wait = WebDriverWait(self.browser, 10)
+        super().warmup()
 
         assert self.browser is not None
         self.browser.get("https://twitter.com")
