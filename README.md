@@ -28,8 +28,8 @@ python3 setup.py install
 ```
 
 ## Getting started (hello bot-task)
-In order to get started with robot task development, just run `rallf create-project "hello"` and it will create a basic project with the files explained below.
-### Create `hello.py`
+In order to get started with robot task development, just run `python3 -m rallf-cli create-project "hello"` and it will create a basic project with the files explained below.
+### `hello.py`
 ```python3
 # File: hello.py
 
@@ -66,10 +66,11 @@ echo '{"jsonrpc": "2.0", "id": 1, "method": "delegate_local", "params": {"routin
 
 ## Get help 
 ```bash
-python3 -m rallf.cli -h
+python3 -m rallf-cli -h
 ```
 
 ## Extended usage
+
 ### Task Manifest
 Task manifest is mandatory for rallf.com tasks, but not necessary for developing, visit [manifest reference](undefined) to learn more in-deep about task manifests.
 ```js
@@ -94,12 +95,15 @@ Task manifest is mandatory for rallf.com tasks, but not necessary for developing
   }
 }
 ```
+
 ### Injected objects
 - `self.robot` this object is injected in the task creation
 - `input` this parameter is passed to the `run(self, input)` function
+
 ### Inter Task Communication (ITC)
 - Call other tasks from the market ([rallf.com](https://rallf.com))
 - Use robot skills
+
 ### Task lifecycle callbacks
 - `warmup(self)` this **optional** method is executed some time before the task starts to speed-up the rest of calls.
 - `run(self, input)` this **required** method handles the work of the task and is triggered at start of the task.
