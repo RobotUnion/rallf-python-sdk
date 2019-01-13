@@ -6,7 +6,7 @@ class TaskFactory:
 
     @staticmethod
     def createFromDir(dir, robot, input, output):
-        manifest_path = "%s/manifest.json" % dir
+        manifest_path = "%s/config/manifest.json" % dir
 
         if not os.path.isfile(manifest_path):
             raise FileNotFoundError("manifest.json not found in package")

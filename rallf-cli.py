@@ -5,8 +5,6 @@ import sys
 import argparse
 import os
 
-#sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
-
 from rallf.args import RallfArgs
 from rallf.tools.execution import Execution
 from rallf.tools.robot_factory import RobotFactory
@@ -14,7 +12,13 @@ from rallf.tools.runner import Runner
 from rallf.tools.task_factory import TaskFactory
 
 
+def sigint_handler(sig, frame):
+    raise InterruptedError()
+
+
 def main():
+    signal.signal(signal.SIGINT, sigint_handler)
+
     p = argparse.ArgumentParser(description="Rallf developer tool")
     p.add_argument("command", nargs=1, action="store", choices=["new-task", "run", "event"], help="rallf command")
     p.add_argument("task_dir", action="store", nargs="?", default=".", help="task directory (default: current)")
@@ -36,13 +40,6 @@ def main():
 
     tf = TaskFactory()
     task = tf.createFromDir(cmd_line.task_dir, bot, sys.stdin, sys.stdout)
-
-
-    def sigint_handler(sig, frame):
-        raise InterruptedError()
-
-
-    signal.signal(signal.SIGINT, sigint_handler)
 
     if cmd_line.func is not None and cmd_line.func not in task.manifest['exports']:
         raise RuntimeError("%s function not exported in package" % cmd_line.func)

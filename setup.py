@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
   name="rallf",
-  version="0.1.25-dev98",
+  version="0.1.25-dev99",
   author="Lluis Santos",
   author_email="lluis@rallf.com",
   description="rallf.com Software Development Kit (SDK)",
