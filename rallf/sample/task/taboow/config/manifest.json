@@ -1,5 +1,0 @@
-{
-  "fqtn": "com.rallf.example.taboow",
-  "main": "rallf.task.taboow.taboow.Taboow",
-  "exports": ["login", "dashboard"]
-}
