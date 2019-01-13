@@ -56,7 +56,7 @@ class Hello(Task):
 
 #### Run `run` method using the `CLI`
 ```bash
-python3 -m rallf.cli run . -f run
+python3 -m rallf-cli run . -f run
 ```
 
 #### Run `run` method using the `jsonrpc` api
