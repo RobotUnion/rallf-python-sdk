@@ -61,7 +61,7 @@ python3 -m rallf-cli run . -f run
 
 #### Run `run` method using the `jsonrpc` api
 ```bash
-echo '{"jsonrpc": "2.0", "id": 1, "method": "delegate_local", "params": {"routine": "run", "args": {}}}' | python3 -m rallf.cli run .
+echo '{"jsonrpc": "2.0", "id": 1, "method": "delegate_local", "params": {"routine": "run", "args": {}}}' | python3 -m rallf-cli run .
 ```
 
 #### Get help 
@@ -109,7 +109,7 @@ Task manifest is mandatory for rallf.com tasks, but not necessary for developing
 - `run(self, input)` this **required** method handles the work of the task and is triggered at start of the task.
 - `cooldown(self)` this **optional** method is called when the task is going to be some time without use.
 
-### Task VS Skill
+### Task vs Skill
 A common question is the difference between Task and Skill inside the RALLF ecosystem, the main difference is that
-Tasks only have one method called `run` and the skill can have multiple, so technically a Task is a subtype of Skill,
-and also a Skill can implement the `run` method and can be called as Task.
+Tasks only have one method called `run` and the skill can have many, so technically a Task is a subtype of Skill,
+and also a Skill can implement the `run` method and can be used as Task too.
