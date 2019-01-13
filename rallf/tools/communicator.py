@@ -1,4 +1,5 @@
 import json
+import random
 
 
 class Communicator:
@@ -16,11 +17,12 @@ class Communicator:
         if not input: raise EOFError("End Of File detected")
         return json.loads(input)
 
-    def rpccall(self, method, params, id=False):
+    def rpccall(self, method, params, wait=True):
         request = {"jsonrpc": "2.0", "method": method, "params": params}
-        if id != False:
-            self.rpcsend({**request, **{"id": id}})
-            return self.waitfor(id)
+        if wait is True:
+            uniqid = random.randint(0, 9999999)
+            self.rpcsend({**request, **{"id": uniqid}})
+            return self.waitfor(uniqid)
         self.rpcsend(request)
 
     def rpcresponse(self, id=None, result=False, error=False):

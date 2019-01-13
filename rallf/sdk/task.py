@@ -1,6 +1,4 @@
-import os
-
-from rallf.sdk.caller import Caller
+from rallf.sdk.network import Network
 from rallf.sdk.listener import Listener
 from rallf.sdk.logger import Logger
 
@@ -13,12 +11,13 @@ class Task:
         self.finished = False
         self.status = "stopped"
         self.logger = Logger(input, output)
-        self.caller = Caller(input, output)
+        self.network = Network(input, output)
         self.listener = Listener(input, output)
         self.home = "%s/data/%s" % (robot.home, manifest['fqtn'])
 
     def warmup(self):
         self.status = "ready"
+        self.network.event("warmup:end", {})
 
     def waitloop(self):
         while not self.finished:
