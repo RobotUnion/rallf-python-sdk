@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
   name="rallf",
-  version="0.1.26-dev102",
+  version="0.1.28-dev1",
   author="Lluis Santos",
   author_email="lluis@rallf.com",
   license="MIT",
@@ -23,5 +23,5 @@ setuptools.setup(
     "Topic :: Software Development",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
   ],
-  install_requires=['selenium', 'appium']
+  install_requires=[pkg.strip() for pkg in open("requirements.txt").readlines() if len(pkg) > 1]
 )

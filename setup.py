@@ -2,9 +2,10 @@ import setuptools
 
 setuptools.setup(
   name="rallf",
-  version="0.1.26",
+  version="0.1.28",
   author="Lluis Santos",
   author_email="lluis@rallf.com",
+  license="MIT",
   description="rallf.com Software Development Kit (SDK)",
   long_description=open("README.md", "r").read(),
   long_description_content_type="text/markdown",
@@ -22,4 +23,5 @@ setuptools.setup(
     "Topic :: Software Development",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
   ],
+  install_requires=[pkg.strip() for pkg in open("requirements.txt").readlines() if len(pkg) > 1]
 )
