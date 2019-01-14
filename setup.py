@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
   name="rallf",
-  version="0.2.2",
+  version="0.2.3",
   author="Lluis Santos",
   author_email="lluis@rallf.com",
   license="MIT",

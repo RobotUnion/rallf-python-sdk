@@ -68,7 +68,7 @@ rallf run . -f run
 
 #### Run `run` method using the `jsonrpc` api
 ```bash
-echo '{"jsonrpc": "2.0", "id": 1, "method": "delegate", "params": {"routing": "local", "routine": "run", "args": {}}}' | rallf run .
+echo '{"jsonrpc": "2.0", "id": 1, "method": "delegate", "params": {"routine": "run", "args": {}}}' | rallf run .
 ```
 
 #### Get help 

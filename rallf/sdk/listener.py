@@ -13,6 +13,9 @@ class Listener(Communicator):
             req = self.wait()
             if 'method' in req:
                 try:
+                    if req['method'] != "delegate":
+                        raise RallfError(-32601, "Invalid method '%s'" % req['method'])
+
                     resp = getattr(task, req['params']['routine'])(req['params']['args'])
                     task.network.rpcresponse(id=req['id'], result=resp, error=False)
                 except RallfError as e:
