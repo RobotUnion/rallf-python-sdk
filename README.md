@@ -28,7 +28,7 @@ python3 setup.py install
 ```
 
 ## Getting started (hello bot-task)
-In order to get started with robot task development, just run `python3 -m rallf.cli create-project "hello"` and it will create a basic project with the files explained below.
+In order to get started with robot task development, just run `rallf create-project "hello"` and it will create a basic project with the files explained below.
 ### `hello.py`
 ```python3
 # File: hello.py

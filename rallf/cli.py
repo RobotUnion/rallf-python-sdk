@@ -35,8 +35,6 @@ def main():
 
     bot = rf.createEmpty() if cmd_line.robot is None else rf.createFromDir(cmd_line.robot)
 
-    r = Runner()
-
     tf = TaskFactory()
     task = tf.createFromDir(cmd_line.task_dir, bot, sys.stdin, sys.stdout)
 
@@ -45,7 +43,7 @@ def main():
 
     x = Execution(task, cmd_line.func, bot, json.loads(cmd_line.input))
 
-    r.execute(x)
+    Runner.execute(x)
 
 
 if __name__ == "__main__":

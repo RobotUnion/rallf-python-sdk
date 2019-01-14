@@ -1,6 +1,6 @@
+from rallf.sdk.logger import Logger
 from rallf.sdk.network import Network
 from rallf.sdk.listener import Listener
-from rallf.sdk.logger import Logger
 
 
 class Task:
@@ -10,8 +10,8 @@ class Task:
         self.robot = robot
         self.finished = False
         self.status = "stopped"
-        self.logger = Logger(input, output)
-        self.network = Network(input, output)
+        self.network = Network(input, output, self.manifest['fqtn'])
+        self.logger = Logger(input, output, self.manifest['fqtn'])
         self.listener = Listener(input, output)
         self.home = "%s/data/%s" % (robot.home, manifest['fqtn'])
 
