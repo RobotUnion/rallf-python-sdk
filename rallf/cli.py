@@ -3,7 +3,6 @@ import json
 import signal
 import sys
 import argparse
-import os
 
 from rallf.args import RallfArgs
 from rallf.tools.execution import Execution

@@ -28,7 +28,7 @@ python3 setup.py install
 ```
 
 ## Getting started (hello bot-task)
-In order to get started with robot task development, just run `python3 -m rallf-cli create-project "hello"` and it will create a basic project with the files explained below.
+In order to get started with robot task development, just run `python3 -m rallf.cli create-project "hello"` and it will create a basic project with the files explained below.
 ### `hello.py`
 ```python3
 # File: hello.py
@@ -56,17 +56,17 @@ class Hello(Task):
 
 #### Run `run` method using the `CLI`
 ```bash
-python3 -m rallf-cli run . -f run
+python3 -m rallf.cli run . -f run
 ```
 
 #### Run `run` method using the `jsonrpc` api
 ```bash
-echo '{"jsonrpc": "2.0", "id": 1, "method": "delegate_local", "params": {"routine": "run", "args": {}}}' | python3 -m rallf-cli run .
+echo '{"jsonrpc": "2.0", "id": 1, "method": "delegate_local", "params": {"routine": "run", "args": {}}}' | python3 -m rallf.cli run .
 ```
 
 #### Get help 
 ```bash
-python3 -m rallf-cli -h
+python3 -m rallf.cli -h
 ```
 
 ## Extended usage
