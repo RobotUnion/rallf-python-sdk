@@ -31,9 +31,9 @@ python3 setup.py install
 In order to get started with robot task development, just run `rallf create-project "hello"` and it will create a basic project with the files explained below.
 ### `hello.py`
 ```python3
-# File: hello.py
+# File: src/hello.py
 
-from rallf import Task
+from rallf.sdk import Task
 
 '''
   Hello task opens github and returns the title of the page upon it is loaded.
@@ -68,7 +68,7 @@ rallf run . -f run
 
 #### Run `run` method using the `jsonrpc` api
 ```bash
-echo '{"jsonrpc": "2.0", "id": 1, "method": "delegate_local", "params": {"routine": "run", "args": {}}}' | rallf run .
+echo '{"jsonrpc": "2.0", "id": 1, "method": "delegate", "params": {"routing": "local", "routine": "run", "args": {}}}' | rallf run .
 ```
 
 #### Get help 
@@ -81,17 +81,15 @@ rallf -h
 ### Task Manifest
 Task manifest is mandatory for rallf.com tasks, but not necessary for developing, visit [manifest reference](undefined) to learn more in-deep about task manifests.
 ```js
-/* File manifest.json */
+/* File config/manifest.json */
 {
   "title": "Hello Task",
   "description": "This tasks logs hello and returns the <title> of github.com",
   "long-description": "@README.md",
   "fqtn": "com.example.hello",
   "type": "task", /* choices: task, skill */
-  "main": "hello.Hello",
+  "main": "src.hello.Hello",
   "exports": ["run"], /* default: ["run"] */
-  "devices": ["firefox"],
-  "skills": [],
   "permissions": {
     "uris": ["https://github.com", "https://google.com"],
     "devices": ["firefox", "chrome"],
