@@ -53,20 +53,27 @@ class Hello(Task):
     
 ```
 ### Try it (rallf cli)
+To use the `cli` you can use either the binary included in the package
+
+`rallf <args>`
+
+or executing directly from python
+
+`python3 -m rallf.cli <args>`
 
 #### Run `run` method using the `CLI`
 ```bash
-python3 -m rallf.cli run . -f run
+rallf run . -f run
 ```
 
 #### Run `run` method using the `jsonrpc` api
 ```bash
-echo '{"jsonrpc": "2.0", "id": 1, "method": "delegate_local", "params": {"routine": "run", "args": {}}}' | python3 -m rallf.cli run .
+echo '{"jsonrpc": "2.0", "id": 1, "method": "delegate_local", "params": {"routine": "run", "args": {}}}' | rallf run .
 ```
 
 #### Get help 
 ```bash
-python3 -m rallf.cli -h
+rallf -h
 ```
 
 ## Extended usage
