@@ -1,11 +1,13 @@
 import json
 import os
+import sys
 
 
 class TaskFactory:
 
     @staticmethod
     def createFromDir(dir, robot, input, output):
+        sys.path.append(dir)
         manifest_path = "%s/config/manifest.json" % dir
 
         if not os.path.isfile(manifest_path):
