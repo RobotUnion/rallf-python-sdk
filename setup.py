@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
   name="rallf",
-  version="0.3.2",
+  version="0.3.3",
   author="Lluis Santos",
   author_email="lluis@rallf.com",
   license="MIT",
@@ -11,7 +11,7 @@ setuptools.setup(
   long_description_content_type="text/markdown",
   url="https://github.com/robotunion/rallf-python-sdk",
   packages=setuptools.find_packages(),
-  scripts=['bin/rallf'],
+  scripts=['bin/rallf-py'],
   classifiers=[
     "Development Status :: 1 - Planning",
     "Programming Language :: Python",

@@ -28,7 +28,7 @@ python3 setup.py install
 ```
 
 ## Getting started (hello bot-task)
-In order to get started with robot task development, just run `rallf create-project "hello"` and it will create a basic project with the files explained below.
+In order to get started with robot task development, just run `rallf-py create-project "hello"` and it will create a basic project with the files explained below.
 ### `hello.py`
 ```python3
 # File: src/hello.py
@@ -55,7 +55,7 @@ class Hello(Task):
 ### Try it (rallf cli)
 To use the `cli` you can use either the binary included in the package
 
-`rallf <args>`
+`rallf-py <args>`
 
 or executing directly from python
 
@@ -63,23 +63,23 @@ or executing directly from python
 
 #### Run `run` method using the `CLI`
 ```bash
-rallf run . -f run
+rallf-py run . -f run
 ```
 
 #### Run `run` method using the `jsonrpc` api
 ```bash
-echo '{"jsonrpc": "2.0", "id": 1, "method": "delegate", "params": {"routine": "run", "args": {}}}' | rallf run .
+echo '{"jsonrpc": "2.0", "id": 1, "method": "delegate", "params": {"routine": "run", "args": {}}}' | rallf-py run .
 ```
 
 #### Get help 
 ```bash
-rallf -h
+rallf-py -h
 ```
 
 ## Extended usage
 
 ### Task Manifest
-Task manifest is mandatory for rallf.com tasks, but not necessary for developing, visit [manifest reference](undefined) to learn more in-deep about task manifests.
+Task manifest is mandatory for rallf.com tasks, but not necessary for developing, visit [manifest reference](https://github.com/RobotUnion/rallf-js-sdk/wiki/Manifest) to learn more in-deep about task manifests.
 ```js
 /* File config/manifest.json */
 {
