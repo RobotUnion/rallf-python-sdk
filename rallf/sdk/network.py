@@ -1,3 +1,5 @@
+import time
+
 from rallf.tools.communicator import Communicator
 
 
@@ -16,4 +18,4 @@ class Network(Communicator):
         return self.call("remote", target, routine, args)
 
     def event(self, name, content=None):
-        return self.rpccall("event", {"name": name, "context": self.context, "content": content}, wait=False)
+        return self.rpccall("event", {"name": name, "context": self.context, "time": time.time(), "content": content}, wait=False)
