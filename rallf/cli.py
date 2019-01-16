@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 import json
+import shutil
 import signal
 import sys
 import argparse
+from pathlib import Path
 
 from rallf.args import RallfArgs
 from rallf.tools.execution import Execution
@@ -19,7 +21,7 @@ def main():
     signal.signal(signal.SIGINT, sigint_handler)
 
     p = argparse.ArgumentParser(description="Rallf developer tool", prog="Rallf-SDK")
-    p.add_argument("command", nargs=1, action="store", choices=["new-task", "run", "event"], help="rallf command")
+    p.add_argument("command", nargs=1, action="store", choices=["run", "new-task"], help="rallf command")
     p.add_argument("task_dir", action="store", nargs="?", default=".", help="task directory (default: current)")
     p.add_argument("-f", "--func", dest="func", default=None, action="store", help="the routine to execute (default: None)")
     p.add_argument("-r", "--robot", dest="robot", action="store", default=None, help="robot to invoke (default: nullbot)")
@@ -32,19 +34,27 @@ def main():
 
     cmd_line = args.getProcessed()
 
-    rf = RobotFactory()
+    if cmd_line.command[0] == "run":
+        rf = RobotFactory()
 
-    bot = rf.createEmpty() if cmd_line.robot is None else rf.createFromDir(cmd_line.robot)
+        bot = rf.createEmpty() if cmd_line.robot is None else rf.createFromDir(cmd_line.robot)
 
-    tf = TaskFactory()
-    task = tf.createFromDir(cmd_line.task_dir, bot, sys.stdin, sys.stdout)
+        tf = TaskFactory()
+        task = tf.createFromDir(cmd_line.task_dir, bot, sys.stdin, sys.stdout)
 
-    if cmd_line.func is not None and cmd_line.func not in task.manifest['exports']:
-        raise RuntimeError("%s function not exported in package" % cmd_line.func)
+        if cmd_line.func is not None and cmd_line.func not in task.manifest['exports']:
+            raise RuntimeError("%s function not exported in package" % cmd_line.func)
 
-    x = Execution(task, cmd_line.func, bot, json.loads(cmd_line.input))
+        x = Execution(task, cmd_line.func, bot, json.loads(cmd_line.input))
 
-    Runner.execute(x)
+        Runner.execute(x)
+    elif cmd_line.command[0] == "new-task":
+        dir_path = Path("%s/config" % cmd_line.task_dir).absolute()
+        dir_path.mkdir(parents=True, exist_ok=True)
+        shutil.copy2("%s/manifest.json" % str(dir_path), str(dir_path))
+        shutil.copy2("%s/../hello.py" % str(dir_path), "%s/.." % str(dir_path))
+    else:
+        raise RuntimeError("Invalid command %s" % cmd_line.command[0])
 
 
 if __name__ == "__main__":

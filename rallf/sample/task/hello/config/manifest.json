@@ -1,0 +1,5 @@
+{
+  "fqtn": "com.rallf.task.hello",
+  "main": "hello.Hello",
+  "exports": ["run"]
+}
