@@ -21,14 +21,14 @@ def sigint_handler(sig, frame):
 def main():
     signal.signal(signal.SIGINT, sigint_handler)
 
-    p = argparse.ArgumentParser(description="Rallf developer tool", prog="Rallf-SDK")
+    p = argparse.ArgumentParser(description="Rallf developer tool", prog="rallf-py")
     p.add_argument("command", nargs=1, action="store", choices=["run", "new-task"], help="rallf command")
     p.add_argument("task_dir", action="store", nargs="?", default=".", help="task directory (default: current)")
     p.add_argument("-f", "--func", dest="func", default=None, action="store", help="the routine to execute (default: None)")
     p.add_argument("-r", "--robot", dest="robot", action="store", default=None, help="robot to invoke (default: nullbot)")
     p.add_argument("-m", "--mocks", dest="mocks", action="store", default=None, help="mocks directory (default: None)")
     p.add_argument("-i", "--input", dest="input", default="{}", action="store", help="task's input in JSON (default: {})")
-    p.add_argument("-v", "--version", action="version", version="%(prog)s 0.2.3", help="prints the SDK version")
+    p.add_argument("-v", "--version", action="version", version="%(prog)s 0.3.3", help="prints the SDK version")
 
     args = RallfArgs()
     p.parse_args(namespace=args)
