@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
   name="rallf",
-  version="0.3.3",
+  version="0.4.0",
   author="Lluis Santos",
   author_email="lluis@rallf.com",
   license="MIT",
@@ -13,7 +13,7 @@ setuptools.setup(
   packages=setuptools.find_packages(),
   scripts=['bin/rallf-py'],
   classifiers=[
-    "Development Status :: 1 - Planning",
+    "Development Status :: 2 - Pre-Alpha",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.5",
