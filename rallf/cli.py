@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import json
+import os
 import shutil
 import signal
 import sys
@@ -51,8 +52,9 @@ def main():
     elif cmd_line.command[0] == "new-task":
         dir_path = Path("%s/config" % cmd_line.task_dir).absolute()
         dir_path.mkdir(parents=True, exist_ok=True)
-        shutil.copy2("%s/manifest.json" % str(dir_path), str(dir_path))
-        shutil.copy2("%s/../hello.py" % str(dir_path), "%s/.." % str(dir_path))
+        src_dir = "%s/sample/task/hello/config" % os.path.dirname(__file__)
+        shutil.copy2("%s/manifest.json" % src_dir, str(dir_path))
+        shutil.copy2("%s/../hello.py" % src_dir, "%s/.." % str(dir_path))
     else:
         raise RuntimeError("Invalid command %s" % cmd_line.command[0])
 
