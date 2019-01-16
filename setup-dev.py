@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
   name="rallf",
-  version="0.4.0-dev14",
+  version="0.4.1-dev15",
   author="Lluis Santos",
   author_email="lluis@rallf.com",
   license="MIT",
@@ -20,8 +20,20 @@ setuptools.setup(
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Intended Audience :: Developers",
-    "Topic :: Software Development",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Artificial Life",
+    "Topic :: Scientific/Engineering :: Image Recognition",
+    "Topic :: Home Automation",
+    "Topic :: Internet",
+    "Topic :: Internet :: WWW/HTTP :: Browsers",
+    "Topic :: Software Development",
+    "Topic :: Software Development :: Build Tools",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Software Development :: Testing",
+    "Topic :: Software Development :: Testing :: Mocking",
+    "Topic :: Software Development :: Testing :: Traffic Generation"
   ],
   install_requires=[pkg.strip() for pkg in open("requirements.txt").readlines() if len(pkg) > 1]
 )
